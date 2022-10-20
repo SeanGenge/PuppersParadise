@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react';
 
 function Navigation() {
-	
 	const result = (async () => {
 		const r = await fetch("/api/maps/")
 			.then(result => result.json());

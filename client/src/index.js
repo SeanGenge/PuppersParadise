@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'semantic-ui-css/semantic.min.css'
+import './scss/global.scss';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
