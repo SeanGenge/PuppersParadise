@@ -17,12 +17,46 @@ const userSchema = new Schema({
 		type: String,
 		trim: true,
 	},
-	friends: [this],
+	address: {
+		type: String,
+		trim: true,
+	},
+	city: {
+		type: String,
+		trim: true,
+	},
+	friends: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'user'
+		},
+	],
+	pets: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'pet'
+		}
+	],
 	password: {
 		type: String,
 		required: true,
 		minLength: 5
 	}
+},
+{
+	toJSON: {
+		virtuals: true,
+	}
+});
+
+userSchema.virtual('friendCount').get(function () {
+	// Keep track of the number of friends
+	return this.friends.length;
+});
+
+userSchema.virtual('petCount').get(function () {
+	// Keep track of the number of pets
+	return this.pets.length;
 });
 
 userSchema.pre('save', async function(next) {
