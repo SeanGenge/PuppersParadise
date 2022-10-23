@@ -1,5 +1,4 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { json } = require('express');
 const { User, Pet } = require('../models');
 const { signToken } = require('../utils/auth');
 const dateScalar = require('./custom_scalar/Date');
@@ -34,7 +33,7 @@ const resolvers = {
 				throw AuthenticationError("No user found with this email address!");
 			}
 			
-			const correctPw = await user.isCorrectPassword(password);
+			const correctPw = await user.checkPassword(password);
 			
 			if (!correctPw) {
 				throw new AuthenticationError("Incorrect credentials!");

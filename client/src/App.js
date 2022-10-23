@@ -1,13 +1,28 @@
 import React from 'react';
-import Navigation from './components/Navigation';
-import MapView from './components/MapView';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./pages/LayoutPage.jsx";
+import Home from "./pages/HomePage.jsx";
+import NoPage from "./pages/NoPage.jsx";
+import FindBuddy from './pages/FindBuddy.jsx';
+import DogFriendlyPlaces from './pages/DogFriendlyPlaces.jsx';
+import Login from './pages/Login.jsx';
+import Signup from './pages/Signup.jsx';
 
 function App() {
-
 	return (
 		<div className="App">
-			<Navigation />
-			<MapView centre={{ lat: -37.965561, lng: 145.269669 }} />
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<Layout />}>
+						<Route index element={<Home />} />
+						<Route path="/findbuddy" element={<FindBuddy />} />
+						<Route path="/dogfriendlyplaces" element={<DogFriendlyPlaces />} />
+						<Route path="/login" element={<Login />} />
+						<Route path="/signup" element={<Signup />} />
+						<Route path="*" element={<NoPage />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
 		</div>
 	);
 }

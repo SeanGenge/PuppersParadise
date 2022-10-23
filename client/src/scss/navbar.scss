@@ -1,0 +1,59 @@
+.icon-lg {
+	font-size: 24px;
+}
+
+.navbar-icon-text {
+	display: inline;
+	margin-left: 15px;
+}
+
+.navbar {
+	&-mobile {
+		background-color: $primary-colour !important;
+		
+		&-title {
+			background-color: $primary-colour;
+			
+			i {
+				color: $secondary-colour;
+			}
+			
+			span {
+				color: $secondary-colour;
+			}
+		}
+		
+		li {
+			background-color: $primary-colour;
+			
+			a {
+				color: $secondary-colour;
+			}
+		}
+	}
+}
+
+.navbar {
+	background-color: $primary-colour !important;
+	padding: 5px 0;
+	
+	&-title {
+		font-size: 20px;
+		font-weight: bold;
+	}
+	
+	&-item {
+		&__align-left {
+			position: absolute;
+			left: 0;
+		}
+	}
+	
+		li {
+			background-color: $primary-colour;
+	
+			a {
+				color: $secondary-colour;
+			}
+		}
+}

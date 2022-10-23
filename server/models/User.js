@@ -50,12 +50,12 @@ const userSchema = new Schema({
 });
 
 userSchema.virtual('friendCount').get(function () {
-	// Keep track of the number of friends
+	// Return the number of friends
 	return this.friends.length;
 });
 
 userSchema.virtual('petCount').get(function () {
-	// Keep track of the number of pets
+	// Return the number of pets
 	return this.pets.length;
 });
 
@@ -70,8 +70,7 @@ userSchema.pre('save', async function(next) {
 	next();
 });
 
-userSchema.methods.isCorrectPassword = async function(password) {
-	// Compare the password with what is in the collection
+userSchema.methods.checkPassword = async function(password) {
 	return await bcrypt.compare(password, this.password);
 }
 
