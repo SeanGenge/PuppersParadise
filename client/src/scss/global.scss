@@ -1,3 +1,12 @@
+html,
+button,
+input,
+optgroup,
+select,
+textarea {
+	font-family: 'Acme', sans-serif;
+}
+
 .background-primary {
 	background-color: $primary-colour !important;
 }
@@ -16,4 +25,12 @@
 
 .foreground-highlight {
 	color: $highlight-colour !important;
+}
+
+.mt-50 {
+	margin-top: 50px;
+}
+
+.mt-25 {
+	margin-top: 25px;
 }

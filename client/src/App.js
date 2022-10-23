@@ -7,23 +7,31 @@ import FindBuddy from './pages/FindBuddy.jsx';
 import DogFriendlyPlaces from './pages/DogFriendlyPlaces.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
+const client = new ApolloClient({
+	uri: '/graphql',
+	cache: new InMemoryCache(),
+});
 
 function App() {
 	return (
-		<div className="App">
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Layout />}>
-						<Route index element={<Home />} />
-						<Route path="/findbuddy" element={<FindBuddy />} />
-						<Route path="/dogfriendlyplaces" element={<DogFriendlyPlaces />} />
-						<Route path="/login" element={<Login />} />
-						<Route path="/signup" element={<Signup />} />
-						<Route path="*" element={<NoPage />} />
-					</Route>
-				</Routes>
-			</BrowserRouter>
-		</div>
+		<ApolloProvider client={client}>
+			<div className="App">
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" element={<Layout />}>
+							<Route index element={<Home />} />
+							<Route path="/findbuddy" element={<FindBuddy />} />
+							<Route path="/dogfriendlyplaces" element={<DogFriendlyPlaces />} />
+							<Route path="/login" element={<Login />} />
+							<Route path="/signup" element={<Signup />} />
+							<Route path="*" element={<NoPage />} />
+						</Route>
+					</Routes>
+				</BrowserRouter>
+			</div>
+		</ApolloProvider>
 	);
 }
 
