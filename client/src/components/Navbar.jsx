@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import M from '@materializecss/materialize';
 
 function Navigation() {
 	return (
