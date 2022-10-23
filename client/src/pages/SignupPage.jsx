@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
+import { ADD_USER } from '../utils/graphql/mutations';
 import Auth from '../utils/auth';
 
 function Signup() {
@@ -45,8 +45,15 @@ function Signup() {
 				variables: { newUser: newUser },
 			});
 			
-			// Log the user in
-			Auth.login(data.addUser.token);
+			if (data) {
+				// Log the user in
+				Auth.login(data.addUser.token);
+				
+				setFirstName('');
+				setLastName('');
+				setEmail('');
+				setPassword('');
+			}
 		}
 		catch (err) {
 			// A more verbose error
@@ -60,7 +67,7 @@ function Signup() {
 				<div className="col s12 center-align">
 					<h3>Sign Up</h3>
 				</div>
-				<form className="col s12 mt-25">
+				<form className="col s12 m6 offset-m3 mt-25">
 					<div className="row">
 						<div className="input-field col s6">
 							<input id="first_name" name="first_name" type="text" className="validate" value={firstName} onChange={handleInputChange} />

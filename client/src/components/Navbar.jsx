@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Auth from '../utils/auth';
 
 function Navigation() {
 	return (
@@ -24,16 +25,32 @@ function Navigation() {
 								Dog friendly places near me
 							</Link>
 						</li>
-						<li>
-							<Link to="/login">
-								Login
-							</Link>
-						</li>
-						<li>
-							<Link to="/signup">
-								Sign up
-							</Link>
-						</li>
+						{
+							Auth.isLoggedIn() ?
+							(
+								<>
+										<li>
+											<a href="#" onClick={() => Auth.logout()}>
+												Logout
+											</a>
+										</li>
+								</>
+							) :
+							(
+								<>
+									<li>
+										<Link to="/login">
+											Login
+										</Link>
+									</li>
+									<li>
+										<Link to="/signup">
+											Sign up
+										</Link>
+									</li>
+								</>
+							)
+						}
 					</ul>
 				</div>
 			</nav>
