@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import '@materializecss/materialize/dist/css/materialize.min.css';
 import './scss/main.scss';
 import App from './App';
