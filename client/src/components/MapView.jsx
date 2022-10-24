@@ -4,7 +4,7 @@ import env from 'react-dotenv';
 
 function MapView({ centre }) {
 	const { isLoaded } = useJsApiLoader({
-		googleMapsApiKey: env.GOOGLE_MAP_API_KEY
+		googleMapsApiKey: "AIzaSyDazc7vWn0pL38tEErJSmrCcsjjsJvVpFc"
 	});
 	
 	if (!isLoaded) {
