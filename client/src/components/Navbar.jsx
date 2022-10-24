@@ -40,20 +40,20 @@ function Navigation() {
 			<nav className="background-primary">
 				<div className="nav-wrapper">
 					<Link to="/" className="brand-logo">
-						<i className="fas fa-solid fa-paw material-icons"></i>
+						<i className="fa-solid fa-paw material-icons"></i>
 						Puppers Paradise
 					</Link>
 					<a href="#" data-target="sidenav" className="sidenav-trigger"><i className="material-icons">menu</i></a>
 					<ul className="right hide-on-med-and-down">
 						<li>
 							<Link to="/findbuddy">
-								<i className="fas fa-solid fa-dog material-icons left"></i>
+								<i className="fa-solid fa-dog material-icons left"></i>
 								Find Dog Buddies
 							</Link>
 						</li>
 						<li>
 							<Link to="/dogfriendlyplaces">
-								<i className="fas fa-solid fa-map-location-dot material-icons left"></i>
+								<i className="fa-solid fa-map-location-dot material-icons left"></i>
 								Dog friendly places near me
 							</Link>
 						</li>

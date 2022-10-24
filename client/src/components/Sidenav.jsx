@@ -14,13 +14,13 @@ function Sidenav() {
 			<ul id="sidenav" className="sidenav">
 				<li>
 					<Link to="/findbuddy">
-						<i className="fas fa-solid fa-dog material-icons left"></i>
+						<i className="fa-solid fa-dog material-icons left"></i>
 						Find Dog Buddies
 					</Link>
 				</li>
 				<li>
 					<Link to="/dogfriendlyplaces">
-						<i className="fas fa-solid fa-map-location-dot material-icons left"></i>
+						<i className="fa-solid fa-map-location-dot material-icons left"></i>
 						Dog friendly places near me
 					</Link>
 				</li>
