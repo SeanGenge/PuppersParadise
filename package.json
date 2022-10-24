@@ -1,5 +1,5 @@
 {
-	"name": "puppers_paradise",
+	"name": "puppers-paradise",
 	"version": "1.0.0",
 	"engines": {
 		"node": "16.18.0",
@@ -14,9 +14,17 @@
 		"seed": "cd server && npm run seed",
 		"build": "cd client && npm run build"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SeanGenge/PuppersParadise.git"
+	},
 	"keywords": [],
-	"author": "Sean Genge",
+	"author": "",
 	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/SeanGenge/PuppersParadise/issues"
+	},
+	"homepage": "https://github.com/SeanGenge/PuppersParadise#readme",
 	"devDependencies": {
 		"concurrently": "^5.1.0"
 	}
