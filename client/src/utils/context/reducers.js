@@ -1,16 +1,15 @@
 import { useReducer } from 'react';
 import {
-	UPDATE_ISLOGGEDIN
+	UPDATE_LOGGEDINUSER
 } from './actions';
 
-export const reducer = (state, {type, payload}) => {
-	switch (type) {
-		case UPDATE_ISLOGGEDIN: {
+export const reducer = (state, action) => {
+	switch (action.type) {
+		case UPDATE_LOGGEDINUSER:
 			return {
 				...state,
-				isLoggedIn: payload,
+				loggedInUser: action.user,
 			};
-		}
 		default:
 			return state;
 	}

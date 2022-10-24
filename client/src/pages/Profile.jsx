@@ -1,21 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../utils/graphql/mutations';
 import Auth from '../utils/auth';
-import { useNavigate } from "react-router-dom";
-import {
-	UPDATE_LOGGEDINUSER
-} from '../utils/context/actions';
-import { useAppContext } from '../utils/context/GlobalState';
 
-function Login() {
+function Profile() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	
-	const [state, dispatch] = useAppContext();
+
 	const [login] = useMutation(LOGIN);
-	const navigate = useNavigate();
-	
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 
@@ -38,19 +30,13 @@ function Login() {
 			const { data } = await login({
 				variables: { email: email, password: password },
 			});
-			
+
 			if (data) {
 				setEmail('');
 				setPassword('');
-				
-				// Update the logged in user
-				dispatch({ type: UPDATE_LOGGEDINUSER, user: data.login.user });
-				
+
 				// Log the user in
 				Auth.login(data.login.token);
-				
-				// Go to the home page
-				navigate("/");
 			}
 		}
 		catch (err) {
@@ -63,7 +49,7 @@ function Login() {
 		<div className="container">
 			<div className="row">
 				<div className="col s12 center-align">
-					<h3>Login</h3>
+					<h3>Your Profile</h3>
 				</div>
 				<form className="col s12 m6 offset-m3 mt-25">
 					<div className="row">
@@ -88,4 +74,4 @@ function Login() {
 	);
 }
 
-export default Login;
+export default Profile;

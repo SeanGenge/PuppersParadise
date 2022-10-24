@@ -33,3 +33,23 @@ export const QUERY_USERS = gql`
 		}
 	}
 `
+
+export const QUERY_USER_BY_ID = gql`
+	query getUserById($id: ID!) {
+		user(_id: $id) {
+			_id
+			email
+			firstName
+			lastName
+			address
+			city
+			pets {
+				_id
+				name
+				birthday
+			}
+			friendCount
+			petCount
+		}
+	}
+`
