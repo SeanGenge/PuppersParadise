@@ -70,6 +70,20 @@ userSchema.pre('save', async function(next) {
 	next();
 });
 
+userSchema.pre('findOneAndUpdate', async function (next) {
+	let update = this.getUpdate();
+	
+	if (update?.password !== undefined && update?.password !== "") {
+		const saltRounds = 10;
+
+		const hashedPassword = await bcrypt.hash(update.password, saltRounds);
+		
+		update.password = hashedPassword;
+	}
+
+	next();
+});
+
 userSchema.methods.checkPassword = async function(password) {
 	return await bcrypt.compare(password, this.password);
 }

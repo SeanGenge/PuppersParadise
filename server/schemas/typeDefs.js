@@ -39,7 +39,7 @@ const typeDefs = gql`
 		lastName: String
 		address: String
 		city: String
-		password: String!
+		password: String
 	}
 	
 	input PetInput {
@@ -62,6 +62,7 @@ const typeDefs = gql`
 	
 	type Mutation {
 		addUser(user: UserInput): Auth
+		updateUser(user: UserInput): User
 		login(email: String!, password: String!): Auth
 		addFriend(friendId: ID!): User
 		addPet(pet: PetInput): PetOwner

@@ -32,7 +32,7 @@ export const QUERY_USERS = gql`
 			petCount
 		}
 	}
-`
+`;
 
 export const QUERY_USER_BY_ID = gql`
 	query getUserById($id: ID!) {
@@ -52,4 +52,4 @@ export const QUERY_USER_BY_ID = gql`
 			petCount
 		}
 	}
-`
+`;

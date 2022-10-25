@@ -10,7 +10,7 @@ import { useAppContext } from '../utils/context/GlobalState';
 
 function Navigation() {
 	const [state, dispatch] = useAppContext();
-	const [getUserData, { loading, error, data }] = useLazyQuery(QUERY_USER_BY_ID);
+	const [getUserData, { data }] = useLazyQuery(QUERY_USER_BY_ID);
 	
 	useEffect(() => {
 		if (data) {

@@ -14,7 +14,7 @@ import FindBuddy from './pages/FindBuddy.jsx';
 import DogFriendlyPlaces from './pages/DogFriendlyPlaces.jsx';
 import Login from './pages/LoginPage.jsx';
 import Signup from './pages/SignupPage.jsx';
-import Profile from './pages/Profile.jsx';
+import Profile from './pages/profile/Profile.jsx';
 import { AppProvider } from './utils/context/GlobalState';
 
 const httpLink = createHttpLink({

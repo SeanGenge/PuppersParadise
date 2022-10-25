@@ -3,9 +3,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN } from '../utils/graphql/mutations';
 import Auth from '../utils/auth';
 import { useNavigate } from "react-router-dom";
-import {
-	UPDATE_LOGGEDINUSER
-} from '../utils/context/actions';
+import { UPDATE_LOGGEDINUSER } from '../utils/context/actions';
 import { useAppContext } from '../utils/context/GlobalState';
 
 function Login() {

@@ -46,3 +46,16 @@ export const LOGIN = gql`
 	}
 }
 `;
+
+export const UPDATE_USER = gql`
+	mutation updateUser($updatedUser: UserInput) {
+		updateUser(user: $updatedUser) {
+			_id
+			email
+			firstName
+			lastName
+			address
+			city
+		}
+	}
+`;
