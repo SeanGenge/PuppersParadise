@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN } from '../utils/graphql/mutations';
 import Auth from '../utils/auth';
 import { useNavigate } from "react-router-dom";
-import { UPDATE_LOGGEDINUSER } from '../utils/context/actions';
+import { UPDATE_ISLOGGEDIN } from '../utils/context/actions';
 import { useAppContext } from '../utils/context/GlobalState';
 
 function Login() {
@@ -28,11 +28,11 @@ function Login() {
 		}
 	};
 
-	const handleSignUp = async (e) => {
+	const handleLogin = async (e) => {
 		e.preventDefault();
 
 		try {
-			// Create the new user
+			// Login
 			const { data } = await login({
 				variables: { email: email, password: password },
 			});
@@ -41,11 +41,10 @@ function Login() {
 				setEmail('');
 				setPassword('');
 				
-				// Update the logged in user
-				dispatch({ type: UPDATE_LOGGEDINUSER, user: data.login.user });
-				
 				// Log the user in
 				Auth.login(data.login.token);
+				
+				dispatch({ type: UPDATE_ISLOGGEDIN, isLoggedIn: true });
 				
 				// Go to the home page
 				navigate("/");
@@ -76,7 +75,7 @@ function Login() {
 							<label htmlFor="password">Password</label>
 						</div>
 					</div>
-					<button className="btn waves-effect waves-light right background-primary" onClick={handleSignUp}>
+					<button className="btn waves-effect waves-light right background-primary" onClick={handleLogin}>
 						Login
 						<i className="material-icons right">send</i>
 					</button>

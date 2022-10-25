@@ -53,3 +53,23 @@ export const QUERY_USER_BY_ID = gql`
 		}
 	}
 `;
+
+export const QUERY_ME = gql`
+	query me {
+		me {
+			_id
+			email
+			firstName
+			lastName
+			address
+			city
+			pets {
+				_id
+				name
+				birthday
+			}
+			friendCount
+			petCount
+		}
+	}
+`;

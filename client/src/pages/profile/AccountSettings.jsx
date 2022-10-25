@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
-import { useAppContext } from '../../utils/context/GlobalState';
 import M from '@materializecss/materialize';
 import { UPDATE_USER } from '../../utils/graphql/mutations';
-import { UPDATE_LOGGEDINUSER } from '../../utils/context/actions';
+import { useQuery } from '@apollo/client';
+import { QUERY_ME } from '../../utils/graphql/queries';
 
 function AccountSettings() {
 	// Store the values locally first until required
 	const [updatedUser, setUpdatedUser] = useState({});
-	const [state, dispatch] = useAppContext();
 	const [updateUser] = useMutation(UPDATE_USER);
+	const { data } = useQuery(QUERY_ME);
 	
 	useEffect(() => {
 		M.updateTextFields();
 	});
 	
 	useEffect(() => {
-		setUpdatedUser({
-			firstName: state.loggedInUser?.firstName || '',
-			lastName: state.loggedInUser?.lastName || '',
-			email: state.loggedInUser?.email || '',
-		});
-	}, [state.loggedInUser?.firstName, state.loggedInUser?.lastName, state.loggedInUser?.email, setUpdatedUser]);
+		if (data) {
+			const user = data.me;
+			setUpdatedUser({
+				firstName: user?.firstName || '',
+				lastName: user?.lastName || '',
+				email: user?.email || '',
+			});
+		}
+	}, [data, setUpdatedUser]);
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -66,8 +69,7 @@ function AccountSettings() {
 			}
 			
 			if (data) {
-				// Update the logged in user
-				dispatch({ type: UPDATE_LOGGEDINUSER, user: data.updatedUser.user });
+				console.log("Saved successfully!");
 			}
 		}
 		catch (err) {

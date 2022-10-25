@@ -12,6 +12,13 @@ const resolvers = {
 		user: async (parent, { _id }) => {
 			return User.findById(_id);
 		},
+		me: async (parent, args, context) => {
+			if (context.user) {
+				return User.findOne({ _id: context.user._id }).populate('friends').populate('pets');
+			}
+			
+			throw new AuthenticationError('You need to be logged in!');
+		},
 		pets: async () => {
 			return Pet.find();
 		},
@@ -22,7 +29,7 @@ const resolvers = {
 	Mutation: {
 		addUser: async (parent, args) => {
 			const user = await User.create(args.user);
-			const token = signToken
+			const token = signToken(user);
 			
 			return { token, user };
 		},
@@ -44,7 +51,7 @@ const resolvers = {
 			throw new AuthenticationError("You need to be logged in!");
 		},
 		login: async (parent, { email, password }) => {
-			const user = await User.findOne({ email: email });
+			const user = await User.findOne({ email: email }).populate('friends').populate('pets');
 			
 			if (!user) {
 				throw AuthenticationError("No user found with this email address!");
@@ -85,7 +92,6 @@ const resolvers = {
 			throw new AuthenticationError("You need to be logged in!");
 		},
 		addPet: async (parent, args, context) => {
-			
 			if (context.user) {
 				const pet = await Pet.create(args.pet);
 				

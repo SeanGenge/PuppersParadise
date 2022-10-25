@@ -7,7 +7,7 @@ const { Provider } = AppContext;
 const AppProvider = ({ value = [], ...props }) => {
 	const [state, dispatch] = useAppReducer({
 		// Can also be used to determine if the user is logged in
-		loggedInUser: null
+		isLoggedIn: false
 	});
 
 	return <Provider value={[state, dispatch]} {...props} />;
