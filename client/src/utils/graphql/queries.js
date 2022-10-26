@@ -73,3 +73,13 @@ export const QUERY_ME = gql`
 		}
 	}
 `;
+
+export const QUERY_GET_ALL_PETS = gql`
+	query getAllPets {
+		pets {
+			_id
+			name
+			birthday
+		}
+	}
+`;

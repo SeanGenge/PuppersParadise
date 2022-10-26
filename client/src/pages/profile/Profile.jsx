@@ -5,7 +5,7 @@ import PuppersProfile from './PuppersProfile';
 
 function Profile() {
 	useEffect(() => {
-		var instance = M.Tabs.init(document.getElementById("tabs"));
+		M.Tabs.init(document.getElementById("tabs"));
 	}, []);
 
 	return (

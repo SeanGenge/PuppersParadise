@@ -6,7 +6,7 @@ function Sidenav() {
 	useEffect(() => {
 		// Run once all elements are rendered correctly
 		var elems = document.querySelectorAll('.sidenav');
-		var instances = M.Sidenav.init(elems);
+		M.Sidenav.init(elems);
 	}, []);
 
 	return (

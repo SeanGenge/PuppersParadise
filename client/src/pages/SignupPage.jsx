@@ -18,7 +18,7 @@ function Signup() {
 	
 	useEffect(() => {
 		var elems = document.querySelectorAll('.datepicker');
-		var instances = M.Datepicker.init(elems, {
+		M.Datepicker.init(elems, {
 			maxDate: new Date(),
 			autoClose: true,
 			onSelect: (date) => {

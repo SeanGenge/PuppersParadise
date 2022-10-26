@@ -94,3 +94,13 @@ export const ADD_PET = gql`
 		}
 	}
 `;
+
+export const UPDATE_PET = gql`
+	mutation updatePet($updatedPet: PetInputUpdate) {
+		updatePet(pet: $updatedPet) {
+			_id
+			name
+			birthday
+		}
+	}
+`;

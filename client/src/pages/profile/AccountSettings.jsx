@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import M from '@materializecss/materialize';
 import { UPDATE_USER } from '../../utils/graphql/mutations';
-import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../../utils/graphql/queries';
 
 function AccountSettings() {
@@ -48,7 +47,6 @@ function AccountSettings() {
 	const handleUpdate = async (e) => {
 		e.preventDefault();
 		
-		// Update the global user as well as the database
 		if (updatedUser?.firstName === "" || updatedUser?.email ==="") {
 			console.log("first name and email fields are required!");
 			return;
