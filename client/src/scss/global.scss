@@ -7,6 +7,10 @@ textarea {
 	font-family: 'Acme', sans-serif;
 }
 
+html, body {
+	height: 100%;
+}
+
 .background-primary {
 	background-color: $primary-colour !important;
 }

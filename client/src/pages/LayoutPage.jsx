@@ -1,14 +1,14 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from '../components/Navbar';
-import Sidenav from "../components/Sidenav";
+import SideNavMobile from "../components/SideNavMobile";
 
 class Layout extends React.Component {
 	render() {
 		return (
 			<>
 				<Navbar />
-				<Sidenav />
+				<SideNavMobile />
 				<div className="main-container">
 					<Outlet />
 				</div>

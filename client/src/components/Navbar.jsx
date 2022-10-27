@@ -5,7 +5,7 @@ import { useAppContext } from '../utils/context/GlobalState';
 
 function Navigation() {
 	const [user, setUserData] = useState({});
-	const [state, dispatch] = useAppContext();
+	const [state] = useAppContext();
 	
 	useEffect(() => {
 		if (!Auth.isLoggedIn() && !state.isLoggedIn) return;
@@ -21,7 +21,7 @@ function Navigation() {
 						<i className="fa-solid fa-paw material-icons"></i>
 						Puppers Paradise
 					</Link>
-					<a href="#" data-target="sidenav" className="sidenav-trigger"><i className="material-icons">menu</i></a>
+					<a href="#" data-target="sideNav-mobile" className="sidenav-trigger"><i className="material-icons">menu</i></a>
 					<ul className="right hide-on-med-and-down">
 						<li>
 							<Link to="/findbuddy">

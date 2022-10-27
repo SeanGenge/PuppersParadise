@@ -1,0 +1,38 @@
+.infoWindow {
+	font-family: 'Acme', sans-serif;
+	
+	&-nowOpen {
+		color: #228B22;
+	}
+	
+	&-closed {
+		color: #FF0000;
+	}
+	
+	&-img {
+		height: 250px;
+		width: 100%;
+		border-radius: 5px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	&-star {
+		color: #FFBF00;
+		
+		&__rating {
+			margin-right: 5px;
+		}
+	}
+}
+
+.mapView {
+	&-sideNav {
+		position: absolute;
+		background-color: white;
+		z-index: 1;
+		width: 400px;
+		height: 100%;
+		left: 0;
+	}
+}

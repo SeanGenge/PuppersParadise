@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import M from '@materializecss/materialize';
 
-function Sidenav() {
+function SideNavMobile() {
 	useEffect(() => {
 		// Run once all elements are rendered correctly
-		var elems = document.querySelectorAll('.sidenav');
-		M.Sidenav.init(elems);
+		var elem = document.getElementById('sideNav-mobile');
+		M.Sidenav.init(elem);
 	}, []);
 
 	return (
 		<>
-			<ul id="sidenav" className="sidenav">
+			<ul id="sideNav-mobile" className="sidenav">
 				<li>
 					<Link to="/findbuddy">
 						<i className="fa-solid fa-dog material-icons left"></i>
@@ -39,4 +39,4 @@ function Sidenav() {
 	);
 }
 
-export default Sidenav;
+export default SideNavMobile;
