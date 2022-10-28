@@ -6,6 +6,11 @@ const petSchema = new Schema({
 		required: true,
 		trim: true,
 	},
+	breed: {
+		type: String,
+		required: true,
+		trim: true,
+	},
 	birthday: {
 		type: Date,
 		trim: true,

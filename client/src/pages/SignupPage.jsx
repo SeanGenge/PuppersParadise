@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { UPDATE_ISLOGGEDIN } from '../utils/context/actions';
 import { useAppContext } from '../utils/context/GlobalState';
 import M from '@materializecss/materialize';
+import BreedAutofillInput from '../components/BreedAutofillInput';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 function Signup() {
 	// Local state for the new user and pet
@@ -17,8 +19,8 @@ function Signup() {
 	const [state, dispatch] = useAppContext();
 	
 	useEffect(() => {
-		var elems = document.querySelectorAll('.datepicker');
-		M.Datepicker.init(elems, {
+		var datePicker = document.getElementById('birthday');
+		M.Datepicker.init(datePicker, {
 			maxDate: new Date(),
 			autoClose: true,
 			onSelect: (date) => {
@@ -27,8 +29,8 @@ function Signup() {
 					birthday: date
 				});
 			}
-		}
-	)}, [setNewPupper, newPupper]);
+		});
+	}, [setNewPupper, newPupper]);
 	
 	const handleInputChange = (e, updateVar, updateCallback) => {
 		const { name, value } = e.target;
@@ -72,12 +74,17 @@ function Signup() {
 	};
 	
 	const addPuppers = async () => {
-		const { data } = await addPet({
-			variables: { newPet: newPupper },
-		});
-		
-		if (data) {
-			console.log(data);
+		try {
+			const { data } = await addPet({
+				variables: { newPet: newPupper },
+			});
+
+			if (data) {
+				console.log(data);
+			}
+		}
+		catch (err) {
+			console.log(JSON.stringify(err, null, 2));
 		}
 	};
 	
@@ -87,7 +94,7 @@ function Signup() {
 				<div className="col s12 center-align">
 					<h3>Sign Up</h3>
 				</div>
-				<form className="col s12 m6 offset-m3 mt-25">
+				<form className="col s12 m8 l6 offset-m3 offset-l3 mt-25">
 					<div className="row">
 						<div className="input-field col s6">
 							<input id="firstName" name="firstName" type="text" className="validate" value={newUser?.firstName || ''} onChange={(e) => handleInputChange(e, newUser, setNewUser)} />
@@ -124,6 +131,9 @@ function Signup() {
 							<input id="birthday" name="birthday" type="text" readOnly className="datepicker" />
 							<label htmlFor="birthday">Puppers birthday</label>
 						</div>
+					</div>
+					<div className="row">
+						<BreedAutofillInput selectedBreed={newPupper?.breed} setSelectedBreed={(e) => handleInputChange(e, newPupper, setNewPupper)} onAutocomplete={(auto) => setNewPupper({...newPupper, breed: auto})} />
 					</div>
 					<button className="btn waves-effect waves-light right background-primary" onClick={handleSignUp}>
 						Sign up

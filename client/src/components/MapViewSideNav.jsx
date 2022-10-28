@@ -5,7 +5,7 @@ function MapViewSideNav() {
 	const [state, dispatch] = useAppContext();
 	
 	return (
-		<div className="mapView-sideNav">
+		<div className="mapView-sideNav ">
 			{state.mapResults ? state.mapResults.map(result => <div>test</div>) : null}
 		</div>
 	);

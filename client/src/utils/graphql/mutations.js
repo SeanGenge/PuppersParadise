@@ -38,6 +38,7 @@ export const LOGIN = gql`
 				pets {
 					_id
 					name
+					breed
 					birthday
 				}
 				friendCount
@@ -81,6 +82,7 @@ export const ADD_PET = gql`
 				pets {
 					_id
 					name
+					breed
 					birthday
 				}
 				friendCount
@@ -89,6 +91,7 @@ export const ADD_PET = gql`
 			pet {
 				_id
 				name
+				breed
 				birthday
 			}
 		}
@@ -100,6 +103,7 @@ export const UPDATE_PET = gql`
 		updatePet(pet: $updatedPet) {
 			_id
 			name
+			breed
 			birthday
 		}
 	}

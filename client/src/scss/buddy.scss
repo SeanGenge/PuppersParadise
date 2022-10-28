@@ -1,0 +1,28 @@
+.buddy-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.buddy-card {
+	min-width: 350px;
+	margin: 10px;
+	background-color: white;
+	border-radius: 5px;
+	
+	&__name {
+		font-size: 34px;
+	}
+	
+	&__breed {
+		
+	}
+	
+	&__age {
+		&-year {
+			margin-right: 5px;
+		}
+	}
+}

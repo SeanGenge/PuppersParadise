@@ -11,6 +11,18 @@ html, body {
 	height: 100%;
 }
 
+.footer {
+	height: 25px;
+}
+
+// https: //stackoverflow.com/questions/4575826/how-to-push-a-footer-to-the-bottom-of-page-when-content-is-short-or-missing
+.flex-container {
+	display: flex;
+	min-height: calc(100vh - #{$nav-height});
+	flex-direction: column;
+	justify-content: space-between;
+}
+
 .background-primary {
 	background-color: $primary-colour !important;
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import SideNavMobile from "../components/SideNavMobile";
+import Footer from '../components/Footer';
 
 class Layout extends React.Component {
 	render() {
@@ -9,9 +10,7 @@ class Layout extends React.Component {
 			<>
 				<Navbar />
 				<SideNavMobile />
-				<div className="main-container">
-					<Outlet />
-				</div>
+				<Outlet />
 			</>
 		);
 	}

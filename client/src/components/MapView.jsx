@@ -97,7 +97,7 @@ function MapView({ centre }) {
 	return (
 		<GoogleMap
 			center={centre}
-			zoom={13}
+			zoom={12}
 			// height: Subtract the navbar size
 			mapContainerStyle={{ width: '100%', height: 'calc(100vh - 64px)' }}
 			onLoad={onMapLoad}

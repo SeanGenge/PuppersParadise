@@ -71,7 +71,7 @@ function AccountSettings() {
 			}
 		}
 		catch (err) {
-			console.log(err);
+			console.log(JSON.stringify(err, null, 2));
 		}
 	};
 

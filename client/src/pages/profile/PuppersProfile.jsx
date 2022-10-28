@@ -3,11 +3,13 @@ import { useQuery, useMutation } from '@apollo/client';
 import M from '@materializecss/materialize';
 import { UPDATE_PET } from '../../utils/graphql/mutations';
 import { QUERY_ME } from '../../utils/graphql/queries';
+import BreedAutofillInput from '../../components/BreedAutofillInput';
 
 function PuppersProfile() {
 	const [id, setId] = useState('');
 	const [puppersName, setPuppersName] = useState('');
 	const [birthday, setBirthday] = useState('');
+	const [pupperBreed, setPupperBreed] = useState('');
 	const { data } = useQuery(QUERY_ME);
 	const [updatePupper] = useMutation(UPDATE_PET)
 
@@ -31,6 +33,7 @@ function PuppersProfile() {
 			
 			setPuppersName(pet.name);
 			setBirthday(pet.birthday);
+			setPupperBreed(pet.breed);
 			setId(pet._id);
 			
 			var elems = document.querySelectorAll('.datepicker');
@@ -57,7 +60,8 @@ function PuppersProfile() {
 			const updatedPet = {
 				_id: id,
 				name: puppersName,
-				birthday: birthday
+				birthday: birthday,
+				breed: pupperBreed
 			};
 			
 			// Update the database user first
@@ -88,6 +92,9 @@ function PuppersProfile() {
 						<input id="birthday" name="birthday" type="text" readOnly className="datepicker" />
 						<label htmlFor="birthday">Birthday</label>
 					</div>
+				</div>
+				<div className="row">
+					<BreedAutofillInput selectedBreed={pupperBreed} setSelectedBreed={(e) => setPupperBreed(e.target.value)} onAutocomplete={(auto) => setPupperBreed(auto)} />
 				</div>
 				<button className="btn waves-effect waves-light right background-primary" onClick={handleSave}>
 					Save

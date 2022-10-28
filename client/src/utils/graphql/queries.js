@@ -19,6 +19,7 @@ export const QUERY_USERS = gql`
 				pets {
 					_id
 					name
+					breed
 					birthday
 				}
 				petCount
@@ -26,6 +27,7 @@ export const QUERY_USERS = gql`
 			pets {
 				_id
 				name
+				breed
 				birthday
 			}
 			friendCount
@@ -46,6 +48,7 @@ export const QUERY_USER_BY_ID = gql`
 			pets {
 				_id
 				name
+				breed
 				birthday
 			}
 			friendCount
@@ -66,6 +69,7 @@ export const QUERY_ME = gql`
 			pets {
 				_id
 				name
+				breed
 				birthday
 			}
 			friendCount
