@@ -7,23 +7,23 @@ const resolvers = {
 	Date: dateScalar,
 	Query: {
 		users: async () => {
-			return User.find().populate('friends').populate('pets');
+			return await User.find().populate('friends').populate('pets');
 		},
 		user: async (parent, { _id }) => {
-			return User.findById(_id);
+			return await User.findById(_id);
 		},
 		me: async (parent, args, context) => {
 			if (context.user) {
-				return User.findOne({ _id: context.user._id }).populate('friends').populate('pets');
+				return await User.findOne({ _id: context.user._id }).populate('friends').populate('pets');
 			}
 			
 			throw new AuthenticationError('You need to be logged in!');
 		},
 		pets: async () => {
-			return Pet.find();
+			return await Pet.find();
 		},
 		pet: async (parent, { _id }) => {
-			return Pet.findById(_id);
+			return await Pet.findById(_id);
 		},
 	},
 	Mutation: {
@@ -79,8 +79,8 @@ const resolvers = {
 				return User.findOneAndUpdate(
 					{ _id: context.user._id },
 					{
-						$addToSet: {
-							friends: { ...friend }
+						$push: {
+							friends: friend._id
 						}
 					},
 					{
@@ -89,6 +89,31 @@ const resolvers = {
 				);
 			}
 			
+			throw new AuthenticationError("You need to be logged in!");
+		},
+		removeFriend: async (parent, { friendId }, context) => {
+			context.user = { _id:'635c9ef25056b5612fd59d22'}
+			if (context.user) {
+				// attempts to find the friend by the id given
+				const friend = await User.findById(friendId);
+
+				if (!friend) {
+					throw new Error(`No user (friend) found by id ${friendId}`);
+				}
+
+				return User.findOneAndUpdate(
+					{ _id: context.user._id },
+					{
+						$pull: {
+							friends: friendId
+						}
+					},
+					{
+						new: true
+					}
+				);
+			}
+
 			throw new AuthenticationError("You need to be logged in!");
 		},
 		addPet: async (parent, args, context) => {

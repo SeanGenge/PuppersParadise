@@ -72,6 +72,7 @@ const typeDefs = gql`
 		updateUser(user: UserInput): User
 		login(email: String!, password: String!): Auth
 		addFriend(friendId: ID!): User
+		removeFriend(friendId: ID!): User
 		addPet(pet: PetInput): PetOwner
 		removePet(petId: ID!): User
 		updatePet(pet: PetInputUpdate) : Pet

@@ -16,13 +16,6 @@ export const QUERY_USERS = gql`
 				lastName
 				address
 				city
-				pets {
-					_id
-					name
-					breed
-					birthday
-					imageFilePath
-				}
 				petCount
 			}
 			pets {
@@ -47,6 +40,15 @@ export const QUERY_USER_BY_ID = gql`
 			lastName
 			address
 			city
+			friends {
+				_id
+				email
+				firstName
+				lastName
+				address
+				city
+				petCount
+			}
 			pets {
 				_id
 				name
@@ -69,6 +71,15 @@ export const QUERY_ME = gql`
 			lastName
 			address
 			city
+			friends {
+				_id
+				email
+				firstName
+				lastName
+				address
+				city
+				petCount
+			}
 			pets {
 				_id
 				name
