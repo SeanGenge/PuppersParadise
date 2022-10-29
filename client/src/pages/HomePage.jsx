@@ -2,9 +2,11 @@ import React from 'react';
 
 function HomePage() {
 	return (
-		<div>
-			Home page
-		</div>
+		<>
+			<div className="homepage-hero">
+				
+			</div>
+		</>
 	);
 }
 

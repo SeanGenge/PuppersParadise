@@ -2,16 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 import { useAppContext } from '../utils/context/GlobalState';
+import { useQuery } from '@apollo/client';
+import { QUERY_ME } from '../utils/graphql/queries';
 
 function Navigation() {
 	const [user, setUserData] = useState({});
 	const [state] = useAppContext();
+	const { data } = useQuery(QUERY_ME);
 	
 	useEffect(() => {
 		if (!Auth.isLoggedIn() && !state.isLoggedIn) return;
 		
-		setUserData(Auth.getUser().data);
-	}, [setUserData, state]);
+		setUserData(data?.me);
+	}, [state, data]);
 	
 	return (
 		<>
@@ -41,6 +44,7 @@ function Navigation() {
 								<>
 									<li>
 										<Link to="/profile">
+											{user?.pets ? <img className="profile-pic" src={user.pets[0]?.imageFilePath} /> : null}
 											{user.firstName}'s profile
 										</Link>
 									</li>

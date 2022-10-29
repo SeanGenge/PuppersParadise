@@ -8,6 +8,17 @@ nav {
 	}
 }
 
+.profile-pic {
+	// https: //stackoverflow.com/questions/7273338/how-to-vertically-align-an-image-inside-a-div
+	width: 50px;
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+	margin-right: 10px;
+	// https: //stackoverflow.com/questions/28700841/how-to-make-a-circular-image-in-css
+	clip-path: circle();
+}
+
 @media screen and (min-width: 500px) {
 	.nav-wrapper {
 			.brand-logo {
