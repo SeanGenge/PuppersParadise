@@ -21,6 +21,7 @@ export const QUERY_USERS = gql`
 					name
 					breed
 					birthday
+					imageFilePath
 				}
 				petCount
 			}
@@ -29,6 +30,7 @@ export const QUERY_USERS = gql`
 				name
 				breed
 				birthday
+				imageFilePath
 			}
 			friendCount
 			petCount
@@ -50,6 +52,7 @@ export const QUERY_USER_BY_ID = gql`
 				name
 				breed
 				birthday
+				imageFilePath
 			}
 			friendCount
 			petCount
@@ -71,6 +74,7 @@ export const QUERY_ME = gql`
 				name
 				breed
 				birthday
+				imageFilePath
 			}
 			friendCount
 			petCount
@@ -84,6 +88,7 @@ export const QUERY_GET_ALL_PETS = gql`
 			_id
 			name
 			birthday
+			imageFilePath
 		}
 	}
 `;

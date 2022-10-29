@@ -7,7 +7,6 @@ import { UPDATE_ISLOGGEDIN } from '../utils/context/actions';
 import { useAppContext } from '../utils/context/GlobalState';
 import M from '@materializecss/materialize';
 import BreedAutofillInput from '../components/BreedAutofillInput';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 function Signup() {
 	// Local state for the new user and pet
@@ -61,8 +60,11 @@ function Signup() {
 				
 				dispatch({ type: UPDATE_ISLOGGEDIN, isLoggedIn: true });
 				
+				// Upload the dog pic to the server
+				const file = await uploadDogPic();
+				
 				// Add your puppers
-				addPuppers();
+				addPuppers(file);
 				
 				navigate('/');
 			}
@@ -73,10 +75,16 @@ function Signup() {
 		}
 	};
 	
-	const addPuppers = async () => {
+	const addPuppers = async (file) => {
 		try {
+			// Creating a new object instead of setting the puppers state because the update is asyncronous so imageFilePath may not be there when adding the pet
+			const pupper = {
+				...newPupper,
+				imageFilePath: file.publicFilePath
+			}
+			
 			const { data } = await addPet({
-				variables: { newPet: newPupper },
+				variables: { newPet: pupper },
 			});
 
 			if (data) {
@@ -88,13 +96,31 @@ function Signup() {
 		}
 	};
 	
+	const uploadDogPic = async () => {
+		// https://blog.logrocket.com/multer-nodejs-express-upload-file/
+		const dogPic = document.getElementById("dogPic");
+		const formData = new FormData();
+		for (let i = 0; i < dogPic.files.length; i++) {
+			formData.append("dogPic", dogPic.files[i]);
+		}
+		
+		// Upload the image to the server in the public folder
+		const filePath = await fetch('/api/image/upload', {
+			method: "POST",
+			body: formData
+		})
+		.then(res => res.json());
+		
+		return filePath;
+	};
+	
 	return (
 		<div className="container">
 			<div className="row">
 				<div className="col s12 center-align">
 					<h3>Sign Up</h3>
 				</div>
-				<form className="col s12 m8 l6 offset-m3 offset-l3 mt-25">
+				<form className="col s12 m8 l6 offset-m3 offset-l3 mt-25" encType="multipart/form-data">
 					<div className="row">
 						<div className="input-field col s6">
 							<input id="firstName" name="firstName" type="text" className="validate" value={newUser?.firstName || ''} onChange={(e) => handleInputChange(e, newUser, setNewUser)} />
@@ -134,6 +160,10 @@ function Signup() {
 					</div>
 					<div className="row">
 						<BreedAutofillInput selectedBreed={newPupper?.breed} setSelectedBreed={(e) => handleInputChange(e, newPupper, setNewPupper)} onAutocomplete={(auto) => setNewPupper({...newPupper, breed: auto})} />
+					</div>
+					<div className="row">
+						<label htmlFor="dogPic">Picture of your dog: </label>
+						<input type="file" id="dogPic" name="dogPic" />
 					</div>
 					<button className="btn waves-effect waves-light right background-primary" onClick={handleSignUp}>
 						Sign up

@@ -15,6 +15,9 @@ const petSchema = new Schema({
 		type: Date,
 		trim: true,
 	},
+	imageFilePath: {
+		type: String
+	}
 });
 
 const Pet = model('pet', petSchema);

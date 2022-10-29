@@ -38,21 +38,28 @@ function BuddyCard({user}) {
 	}
 	
 	return (
-				<div className="card buddy-card">
-					<div className="card-content">
-						<div className="buddy-card__name center-align">{pupper.name}</div>
-						<div className="buddy-card__breed center-align">
-							{pupper.breed}
+			<div className="row">
+				<div className="col s12 m7">
+					<div className="card buddy-card">
+						<div className="card-image">
+							<img className="buddy-card__image" src={pupper.imageFilePath} alt={pupper.imageFilePath} />
+							<div className="buddy-card__name card-title">{pupper.name}</div>
 						</div>
-						<div className="buddy-card__age center-align">
-							<span className="buddy-card__age-year">{puppersAge[0]} {yearMonthText[0]}</span>
-							{puppersAge[1] !== 0 ? <span className="buddy-card__age-month">{puppersAge[1]} {yearMonthText[1]}</span> : null}
-						</div>
-						<div className="buddy-card__owner center-align">
-							<span>Owner: </span>{user.firstName}
+						<div className="card-content">
+							<div className="buddy-card__breed">
+								{pupper.breed}
+							</div>
+							<div className="buddy-card__age">
+								<span className="buddy-card__age-year">{puppersAge[0]} {yearMonthText[0]}</span>
+								{puppersAge[1] !== 0 ? <span className="buddy-card__age-month">{puppersAge[1]} {yearMonthText[1]}</span> : null}
+							</div>
+							<div className="buddy-card__owner">
+								<span>Owner: </span>{user.firstName}
+							</div>
 						</div>
 					</div>
 				</div>
+			</div>
 	);
 }
 

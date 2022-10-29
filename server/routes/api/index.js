@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const mapsRoutes = require('./mapRoutes.js');
+const imageRoutes = require('./imageRoute.js');
 
-router.use('/maps', mapsRoutes);
+router.use('/image', imageRoutes);
 
 module.exports = router;

@@ -142,14 +142,15 @@ const resolvers = {
 
 			throw new AuthenticationError("You need to be logged in!");
 		},
-		updatePet: async (parent, { pet: { _id, name, breed, birthday } }, context) => {
+		updatePet: async (parent, { pet: { _id, name, breed, birthday, imageFilePath } }, context) => {
 			if (context.user) {
 				const pet = Pet.findOneAndUpdate(
 					{ _id: _id },
 					{
 						name,
 						birthday,
-						breed
+						breed,
+						imageFilePath
 					},
 					{
 						new: true

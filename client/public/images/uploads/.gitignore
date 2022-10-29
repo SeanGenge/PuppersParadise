@@ -1,0 +1,5 @@
+# Ignore everything in this folder for the git repo
+
+*
+*/
+!.gitignore

@@ -22,6 +22,7 @@ const typeDefs = gql`
 		name: String!
 		breed: String!
 		birthday: Date
+		imageFilePath: String
 	}
 	
 	type Auth {
@@ -47,6 +48,7 @@ const typeDefs = gql`
 		name: String!
 		breed: String!
 		birthday: Date
+		imageFilePath: String
 	}
 	
 	input PetInputUpdate {
@@ -54,6 +56,7 @@ const typeDefs = gql`
 		name: String!
 		breed: String!
 		birthday: Date
+		imageFilePath: String
 	}
 
 	type Query {

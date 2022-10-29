@@ -40,6 +40,7 @@ export const LOGIN = gql`
 					name
 					breed
 					birthday
+					imageFilePath
 				}
 				friendCount
 				petCount
@@ -84,6 +85,7 @@ export const ADD_PET = gql`
 					name
 					breed
 					birthday
+					imageFilePath
 				}
 				friendCount
 				petCount
@@ -93,6 +95,7 @@ export const ADD_PET = gql`
 				name
 				breed
 				birthday
+				imageFilePath
 			}
 		}
 	}
@@ -105,6 +108,7 @@ export const UPDATE_PET = gql`
 			name
 			breed
 			birthday
+			imageFilePath
 		}
 	}
 `;
