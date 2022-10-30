@@ -2,11 +2,15 @@ import React, { useEffect } from 'react';
 import M from '@materializecss/materialize';
 import FindBuddyList from '../components/FindBuddyList';
 import FriendsList from '../components/FriendsList';
+import Auth from '../utils/auth';
+import Login from '../pages/LoginPage';
 
 function FindBuddy() {
 	useEffect(() => {
 		M.Tabs.init(document.getElementById("buddytabs"));
 	}, []);
+	
+	if (!Auth.isLoggedIn()) return <Login />
 
 	return (
 		<div className="container">

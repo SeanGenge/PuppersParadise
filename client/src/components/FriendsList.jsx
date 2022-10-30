@@ -22,9 +22,9 @@ function FriendsList() {
 
 	return (
 		<>
-			{state.friends ? state.friends.map((friend, id) => {
+			{state?.friends?.length ? state.friends.map((friend, id) => {
 				return <BuddyCard key={id} user={friend} loggedInUser={me} />
-			}) : null}
+			}) : <div className="no-buddies">Please add a buddy</div>}
 		</>
 	);
 }

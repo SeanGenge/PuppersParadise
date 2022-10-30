@@ -8,9 +8,13 @@ class Layout extends React.Component {
 	render() {
 		return (
 			<>
+			
 				<Navbar />
 				<SideNavMobile />
-				<Outlet />
+				<div className="content">
+					<Outlet />
+				</div>
+				{/* <Footer /> */}
 			</>
 		);
 	}

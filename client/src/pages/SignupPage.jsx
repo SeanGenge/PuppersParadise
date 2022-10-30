@@ -163,7 +163,7 @@ function Signup() {
 					</div>
 					<div className="row">
 						<label htmlFor="dogPic">Picture of your dog: </label>
-						<input type="file" id="dogPic" name="dogPic" />
+						<input type="file" id="dogPic" name="dogPic" className="btn-filepicker" />
 					</div>
 					<button className="btn waves-effect waves-light right background-primary" onClick={handleSignUp}>
 						Sign up

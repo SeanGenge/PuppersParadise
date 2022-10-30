@@ -11,12 +11,15 @@ html, body {
 	height: 100%;
 }
 
-.App, #root {
-	height: 100%;
+.content {
+	height: calc(100% - #{$nav-height} - #{$footer-height});
 }
 
-.footer {
-	height: 25px;
+.page-footer {
+	height: $footer-height;
+	padding-top: 15px;
+	padding-left: 25px;
+	background-color: $primary-colour;
 }
 
 // https: //stackoverflow.com/questions/4575826/how-to-push-a-footer-to-the-bottom-of-page-when-content-is-short-or-missing

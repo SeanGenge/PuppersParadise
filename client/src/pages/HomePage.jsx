@@ -6,6 +6,7 @@ function HomePage() {
 			<div className="homepage-hero">
 				
 			</div>
+			
 		</>
 	);
 }

@@ -14,7 +14,7 @@ function MapView() {
 	});
 	const [nearbyPlaces, setNearbyPlaces] = useState([]);
 	const [activeMarker, setActiveMarker] = useState(null);
-	const [currentLocation, setCurrentLocation] = useState(null);
+	const [currentLocation, setCurrentLocation] = useState({ lat: -37.904100, lng: 144.995790 });
 	const [state, dispatch] = useAppContext();
 	const dogParkMapIcon = '/images/icons/dogParkMapIcon.png'
 	const currentLocationMapIcon = '/images/icons/currentLocation.png'
@@ -33,7 +33,7 @@ function MapView() {
 			
 			let request = {
 				location: currLocation,
-				radius: '50000',
+				radius: '10000',
 				query: 'dog park'
 			};
 			
@@ -53,10 +53,6 @@ function MapView() {
 					dispatch({ type: UPDATE_MAPRESULTS, mapResults: results });
 				}
 			});
-		}, null, {
-			timeout: 0,
-			enableHighAccuracy: true,
-			maximumAge: Infinity,
 		});
 	};
 
@@ -133,7 +129,7 @@ function MapView() {
 					: null}
 			</Marker>
 			{/* Nearby places markers */}
-			{nearbyPlaces.map((np, i) => <Marker key={i} position={np.geometry.location} icon={`${process.env.PUBLIC_URL}${dogParkMapIcon}`} onClick={() => handleActiveMarker(i)}>
+			{nearbyPlaces?.map((np, i) => <Marker key={i} position={np.geometry.location} icon={`${process.env.PUBLIC_URL}${dogParkMapIcon}`} onClick={() => handleActiveMarker(i)}>
 				{activeMarker === i ? (
 					<InfoWindow onCloseClick={() => setActiveMarker(null)}>
 						<div className="infoWindow">

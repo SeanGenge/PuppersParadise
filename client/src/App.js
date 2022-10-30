@@ -39,24 +39,22 @@ const client = new ApolloClient({
 function App() {
 	return (
 		<ApolloProvider client={client}>
-				<div className="App">
-					<BrowserRouter>
-						{/* Our own app provider that will keep track of our state globally */}
-						<AppProvider>
-							<Routes>
-								<Route path="/" element={<Layout />}>
-									<Route index element={<Home />} />
-									<Route path="/findbuddy" element={<FindBuddyPage />} />
-									<Route path="/dogfriendlyplaces" element={<DogFriendlyPlaces />} />
-									<Route path="/login" element={<Login />} />
-									<Route path="/signup" element={<Signup />} />
-									<Route path="/profile" element={<Profile />} />
-									<Route path="*" element={<NoPage />} />
-								</Route>
-							</Routes>
-						</AppProvider>
-					</BrowserRouter>
-				</div>
+			<BrowserRouter>
+				{/* Our own app provider that will keep track of our state globally */}
+				<AppProvider>
+					<Routes>
+						<Route path="/" element={<Layout />}>
+							<Route index element={<Home />} />
+							<Route path="/findbuddy" element={<FindBuddyPage />} />
+							<Route path="/dogfriendlyplaces" element={<DogFriendlyPlaces />} />
+							<Route path="/login" element={<Login />} />
+							<Route path="/signup" element={<Signup />} />
+							<Route path="/profile" element={<Profile />} />
+							<Route path="*" element={<NoPage />} />
+						</Route>
+					</Routes>
+				</AppProvider>
+			</BrowserRouter>
 		</ApolloProvider>
 	);
 }
