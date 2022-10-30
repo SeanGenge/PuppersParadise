@@ -14,6 +14,7 @@ function MapView({ centre }) {
 	});
 	const [nearbyPlaces, setNearbyPlaces] = useState([]);
 	const [activeMarker, setActiveMarker] = useState(null);
+	const [currentLocation, setCurrentLocation] = useState(null);
 	const [state, dispatch] = useAppContext();
 	const dogParkMapIcon = '/images/icons/dogParkMapIcon.png'
 	const currentLocationMapIcon = '/images/icons/currentLocation.png'
@@ -21,28 +22,41 @@ function MapView({ centre }) {
 	// https://stackoverflow.com/questions/66944396/can-i-use-google-places-with-react-google-maps-api
 	// Requires the places library be passed in through the useJsApiLoader
 	const onMapLoad = (map) => {
-		let request = {
-			location: centre,
-			radius: '50000',
-			query: 'dog park'
-		};
+		// Get the current location of the user
+		navigator.geolocation.watchPosition(position => {
+			let currLocation = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+			console.log(currLocation);
+			setCurrentLocation(currLocation);
+			
+			let request = {
+				location: currLocation,
+				radius: '50000',
+				query: 'dog park'
+			};
+			
+			let service = new window.google.maps.places.PlacesService(map);
 
-		let service = new window.google.maps.places.PlacesService(map);
+			// https://developers.google.com/maps/documentation/javascript/places#TextSearchRequests
+			service.textSearch(request, (results, status) => {
+				if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+					const np = [];
 
-		// https://developers.google.com/maps/documentation/javascript/places#TextSearchRequests
-		service.textSearch(request, (results, status) => {
-			if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-				const np = [];
+					for (var i = 0; i < results.length; i++) {
+						// Save each result in the coords
+						np.push(results[i]);
+					}
 
-				for (var i = 0; i < results.length; i++) {
-					// Save each result in the coords
-					np.push(results[i]);
+					setNearbyPlaces(np);
+					dispatch({ type: UPDATE_MAPRESULTS, mapResults: results });
 				}
-
-				setNearbyPlaces(np);
-				console.log(results);
-				dispatch({ type: UPDATE_MAPRESULTS, mapResults: results });
-			}
+			});
+		}, null, {
+			timeout: 0,
+			enableHighAccuracy: true,
+			maximumAge: Infinity,
 		});
 	};
 
@@ -96,7 +110,7 @@ function MapView({ centre }) {
 
 	return (
 		<GoogleMap
-			center={centre}
+			center={currentLocation}
 			zoom={12}
 			// height: Subtract the navbar size
 			mapContainerStyle={{ width: '100%', height: 'calc(100vh - 64px)' }}
@@ -109,7 +123,7 @@ function MapView({ centre }) {
 			}}>
 
 			{/* Your location marker */}
-			<Marker position={centre} icon={`${process.env.PUBLIC_URL}${currentLocationMapIcon}`} onClick={() => handleActiveMarker("yourLocation")}>
+			<Marker position={currentLocation} icon={`${process.env.PUBLIC_URL}${currentLocationMapIcon}`} onClick={() => handleActiveMarker("yourLocation")}>
 				{activeMarker === "yourLocation" ? (
 					<InfoWindow onCloseClick={() => setActiveMarker(null)}>
 						<div>
