@@ -6,7 +6,7 @@ import { UPDATE_MAPRESULTS } from '../utils/context/actions';
 const libraries = ["places"];
 
 // Docs: https://react-google-maps-api-docs.netlify.app/#section-introduction
-function MapView({ centre }) {
+function MapView() {
 	// Cannot be called in a useEffect hook
 	const { isLoaded } = useJsApiLoader({
 		googleMapsApiKey: "AIzaSyDazc7vWn0pL38tEErJSmrCcsjjsJvVpFc",
@@ -23,12 +23,12 @@ function MapView({ centre }) {
 	// Requires the places library be passed in through the useJsApiLoader
 	const onMapLoad = (map) => {
 		// Get the current location of the user
-		navigator.geolocation.watchPosition(position => {
+		navigator.geolocation.getCurrentPosition(position => {
 			let currLocation = {
 				lat: position.coords.latitude,
 				lng: position.coords.longitude
 			};
-			console.log(currLocation);
+			
 			setCurrentLocation(currLocation);
 			
 			let request = {
