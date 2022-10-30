@@ -1,0 +1,12 @@
+#validate-firstName,
+#validate-email,
+#validate-password,
+#validate-puppersName,
+#validate-breed {
+	color: red;
+	display: none;
+}
+
+.invalid {
+	display: block !important;
+}

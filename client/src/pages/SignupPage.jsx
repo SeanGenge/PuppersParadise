@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, isValidElement } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_USER, ADD_PET } from '../utils/graphql/mutations';
 import Auth from '../utils/auth';
@@ -31,6 +31,10 @@ function Signup() {
 		});
 	}, [setNewPupper, newPupper]);
 	
+	useEffect(() => {
+		checkValid();
+	});
+	
 	const handleInputChange = (e, updateVar, updateCallback) => {
 		const { name, value } = e.target;
 		
@@ -41,8 +45,61 @@ function Signup() {
 		});
 	};
 	
+	const checkValid = () => {
+		// Validates the form. Returns true if valid and false otherwise
+		let invalidItems = [];
+		let validItems = [];
+		
+		// Not the most elegant validation
+		if (!newUser?.firstName) {
+			invalidItems.push(document.getElementById("validate-firstName"));
+		}
+		else {
+			validItems.push(document.getElementById("validate-firstName"));
+		}
+		
+		if (!newUser?.email) {
+			invalidItems.push(document.getElementById("validate-email"));
+		}
+		else {
+			validItems.push(document.getElementById("validate-email"));
+		}
+		
+		if (!newUser?.password || newUser?.password?.length < 5) {
+			invalidItems.push(document.getElementById("validate-password"));
+		}
+		else {
+			validItems.push(document.getElementById("validate-password"));
+		}
+		
+		if (!newPupper?.name) {
+			invalidItems.push(document.getElementById("validate-puppersName"));
+		}
+		else {
+			validItems.push(document.getElementById("validate-puppersName"));
+		}
+		
+		if (!newPupper?.breed) {
+			invalidItems.push(document.getElementById("validate-breed"));
+		}
+		else {
+			validItems.push(document.getElementById("validate-breed"));
+		}
+		
+		invalidItems.forEach(ii => ii.classList.add("invalid"));
+		
+		validItems.forEach(ii => ii.classList.remove("invalid"));
+		
+		if (invalidItems.length) return false;
+		
+		return true;
+	}
+	
 	const handleSignUp = async (e) => {
 		e.preventDefault();
+		
+		// Validate
+		if (!checkValid()) return;
 		
 		if (newUser?.firstName === undefined || newUser?.password === undefined || newUser?.email === undefined || newUser?.firstName === '' || newUser?.password === '' || newUser?.email === '') {
 			return;
@@ -122,9 +179,10 @@ function Signup() {
 				</div>
 				<form className="col s12 m8 l6 offset-m3 offset-l3 mt-25" encType="multipart/form-data">
 					<div className="row">
-						<div className="input-field col s6">
+						<div id="first-name-field" className="input-field col s6">
 							<input id="firstName" name="firstName" type="text" className="validate" value={newUser?.firstName || ''} onChange={(e) => handleInputChange(e, newUser, setNewUser)} />
 							<label htmlFor="firstName">First Name</label>
+							<div id="validate-firstName">Please enter a first name!</div>
 						</div>
 						<div className="input-field col s6">
 							<input id="lastName" name="lastName" type="text" className="validate" value={newUser?.lastName || ''} onChange={(e) => handleInputChange(e, newUser, setNewUser)} />
@@ -132,24 +190,27 @@ function Signup() {
 						</div>
 					</div>
 					<div className="row">
-						<div className="input-field col s12">
+						<div id="password-field" className="input-field col s12">
 							<input id="password" name="password" type="password" className="validate" value={newUser?.password || ''} onChange={(e) => handleInputChange(e, newUser, setNewUser)} />
-								<label htmlFor="password">Password</label>
+							<label htmlFor="password">Password</label>
+							<div id="validate-password">Please enter a password that is at least 5 characters in length!</div>
 						</div>
 					</div>
 					<div className="row">
-						<div className="input-field col s12">
+						<div id="email-field" className="input-field col s12">
 							<input id="email" name="email" type="email" className="validate" value={newUser?.email || ''} onChange={(e) => handleInputChange(e, newUser, setNewUser)} />
-								<label htmlFor="email">Email</label>
+							<label htmlFor="email">Email</label>
+							<div id="validate-email">Please enter an email!</div>
 						</div>
 					</div>
 					<div className="col s12 center-align">
 						<h4>Puppers Details</h4>
 					</div>
 					<div className="row">
-						<div className="input-field col s12">
+						<div id="pupper-name-field" className="input-field col s12">
 							<input id="name" name="name" type="text" className="validate" value={newPupper?.name || ''} onChange={(e) => handleInputChange(e, newPupper, setNewPupper)} />
 							<label htmlFor="name">Puppers Name</label>
+							<div id="validate-puppersName">Please enter a puppers name!</div>
 						</div>
 					</div>
 					<div className="row">
@@ -159,7 +220,10 @@ function Signup() {
 						</div>
 					</div>
 					<div className="row">
-						<BreedAutofillInput selectedBreed={newPupper?.breed} setSelectedBreed={(e) => handleInputChange(e, newPupper, setNewPupper)} onAutocomplete={(auto) => setNewPupper({...newPupper, breed: auto})} />
+						<div id="pupper-breed-field" className="input-field col s12">
+							<BreedAutofillInput selectedBreed={newPupper?.breed} setSelectedBreed={(e) => handleInputChange(e, newPupper, setNewPupper)} onAutocomplete={(auto) => setNewPupper({ ...newPupper, breed: auto })} />
+							<div id="validate-breed">Please enter a puppers breed!</div>
+						</div>
 					</div>
 					<div className="row">
 						<label htmlFor="dogPic">Picture of your dog: </label>
