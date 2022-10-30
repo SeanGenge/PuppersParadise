@@ -1,4 +1,5 @@
 import React from 'react';
+import WhyChooseUs from '../components/WhyChooseUs';
 
 function HomePage() {
 	return (
@@ -6,7 +7,7 @@ function HomePage() {
 			<div className="homepage-hero">
 				
 			</div>
-			
+			<WhyChooseUs />
 		</>
 	);
 }

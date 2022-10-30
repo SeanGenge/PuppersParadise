@@ -1,0 +1,12 @@
+.why-choose-us {
+	border-radius: 15px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	
+	&__image {
+		height: 250px;
+		object-fit: cover;
+		border-top-left-radius: 15px !important;
+		border-top-right-radius: 15px !important;
+	}
+}

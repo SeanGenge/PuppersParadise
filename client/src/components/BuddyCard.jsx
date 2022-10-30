@@ -101,7 +101,7 @@ function BuddyCard({ user, loggedInUser }) {
 				<div className="card buddy-card">
 					<div className="card-image">
 						<img className="buddy-card__image" src={pupper.imageFilePath} alt={pupper.imageFilePath} />
-						<div className="buddy-card__name card-title">{pupper?.name || ''}</div>
+						<div className="buddy-card__name card-title text-border">{pupper?.name || ''}</div>
 						{isFriend ? (<a className="btn-floating halfway-fab waves-effect waves-light red" onClick={(e) => removeFriendCallback(e)}><i className="material-icons">remove</i></a>)
 						: (<a className="btn-floating halfway-fab waves-effect waves-light red" onClick={(e) => addFriendCallback(e)}><i className="material-icons">add</i></a>)}
 					</div>
