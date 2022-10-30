@@ -3,19 +3,27 @@ import { Link } from 'react-router-dom';
 import M from '@materializecss/materialize';
 import Auth from '../utils/auth';
 import { useAppContext } from '../utils/context/GlobalState';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/graphql/queries';
 
 function SideNavMobile() {
 	const [user, setUserData] = useState({});
 	const [state] = useAppContext();
-	const { data } = useQuery(QUERY_ME);
-	
+	const [getLoggedInUser, { data }] = useLazyQuery(QUERY_ME);
+
+	useEffect(() => {
+		if (Auth.isLoggedIn() && state.isLoggedIn) {
+			getLoggedInUser();
+		}
+	}, [state, getLoggedInUser]);
+
 	useEffect(() => {
 		if (!Auth.isLoggedIn() && !state.isLoggedIn) return;
 
-		setUserData(data?.me);
-	}, [state, data]);
+		if (data && data !== undefined) {
+			setUserData(data?.me);
+		}
+	}, [state, data, setUserData]);
 	
 	useEffect(() => {
 		// Run once all elements are rendered correctly

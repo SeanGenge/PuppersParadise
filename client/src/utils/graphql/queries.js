@@ -16,6 +16,13 @@ export const QUERY_USERS = gql`
 				lastName
 				address
 				city
+				pets {
+					_id
+					name
+					breed
+					birthday
+					imageFilePath
+				}
 				petCount
 			}
 			pets {
@@ -78,6 +85,13 @@ export const QUERY_ME = gql`
 				lastName
 				address
 				city
+				pets {
+					_id
+					name
+					breed
+					birthday
+					imageFilePath
+				}
 				petCount
 			}
 			pets {

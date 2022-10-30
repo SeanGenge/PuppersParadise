@@ -7,14 +7,44 @@ const resolvers = {
 	Date: dateScalar,
 	Query: {
 		users: async () => {
-			return await User.find().populate('friends').populate('pets');
+			try {
+				const users = await User.find().populate([
+					{
+						path: 'friends',
+						populate: {
+							// Get friends pets
+							path: 'pets'
+						}
+					},
+					{
+						path: 'pets'
+					},
+				]);
+				
+				return users;
+			}
+			catch (err) {
+				console.log(err);
+				throw new Error(err);
+			}
 		},
 		user: async (parent, { _id }) => {
 			return await User.findById(_id);
 		},
 		me: async (parent, args, context) => {
 			if (context.user) {
-				return await User.findOne({ _id: context.user._id }).populate('friends').populate('pets');
+				return await User.findOne({ _id: context.user._id }).populate([
+					{
+						path: 'friends',
+						populate: {
+							// Get friends pets
+							path: 'pets'
+						}
+					},
+					{
+						path: 'pets'
+					},
+				]);
 			}
 			
 			throw new AuthenticationError('You need to be logged in!');
@@ -51,7 +81,20 @@ const resolvers = {
 			throw new AuthenticationError("You need to be logged in!");
 		},
 		login: async (parent, { email, password }) => {
-			const user = await User.findOne({ email: email }).populate('friends').populate('pets');
+			const user = await User.findOne({ email }).populate([
+				{
+					path: 'friends',
+					populate: {
+						// Get friends pets
+						path: 'pets'
+					}
+				},
+				{
+					path: 'pets'
+				},
+			]);
+			
+			const a = JSON.parse(JSON.stringify(user));
 			
 			if (!user) {
 				throw AuthenticationError("No user found with this email address!");
@@ -86,13 +129,23 @@ const resolvers = {
 					{
 						new: true
 					}
-				);
+				).populate([
+					{
+						path: 'friends',
+						populate: {
+							// Get friends pets
+							path: 'pets'
+						}
+					},
+					{
+						path: 'pets'
+					},
+				]);
 			}
 			
 			throw new AuthenticationError("You need to be logged in!");
 		},
 		removeFriend: async (parent, { friendId }, context) => {
-			context.user = { _id:'635c9ef25056b5612fd59d22'}
 			if (context.user) {
 				// attempts to find the friend by the id given
 				const friend = await User.findById(friendId);
@@ -111,7 +164,18 @@ const resolvers = {
 					{
 						new: true
 					}
-				);
+				).populate([
+					{
+						path: 'friends',
+						populate: {
+							// Get friends pets
+							path: 'pets'
+						}
+					},
+					{
+						path: 'pets'
+					},
+				]);
 			}
 
 			throw new AuthenticationError("You need to be logged in!");

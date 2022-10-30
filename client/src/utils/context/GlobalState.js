@@ -9,7 +9,9 @@ const AppProvider = ({ value = [], ...props }) => {
 		// Can also be used to determine if the user is logged in
 		isLoggedIn: false,
 		// The map results of nearby places
-		mapResults: null
+		mapResults: null,
+		// The logged in users friends
+		friends: []
 	});
 
 	return <Provider value={[state, dispatch]} {...props} />;

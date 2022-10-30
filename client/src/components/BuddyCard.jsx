@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { calculateAge } from '../utils/age';
 import { useMutation } from '@apollo/client';
 import { ADD_FRIEND, REMOVE_FRIEND } from '../utils/graphql/mutations';
+import { UPDATE_FRIENDS } from '../utils/context/actions';
+import { useAppContext } from '../utils/context/GlobalState';
 
 function BuddyCard({ user, loggedInUser }) {
 	const [pupper, setPupper] = useState(null);
@@ -10,6 +12,7 @@ function BuddyCard({ user, loggedInUser }) {
 	const [isFriend, setIsFriend] = useState(false);
 	const [addFriend] = useMutation(ADD_FRIEND);
 	const [removeFriend] = useMutation(REMOVE_FRIEND);
+	const [state, dispatch] = useAppContext();
 	
 	useEffect(() => {
 		if (user && user?.pets && user?.pets.length > 0) {
@@ -39,34 +42,49 @@ function BuddyCard({ user, loggedInUser }) {
 	
 	useEffect(() => {
 		// Determines whether the user is a friend of the logged in user
-		loggedInUser?.friends?.forEach(friend => {
+		let found = false;
+		
+		state.friends?.forEach(friend => {
 			if (friend._id === user._id) {
-				setIsFriend(true);
+				found = true;
 				return;
 			}
 		});
-	}, [loggedInUser, user]);
+		
+		if (found) setIsFriend(true);
+		else setIsFriend(false);
+	}, [state.friends, user]);
 	
-	const addFriendCallback = (e) => {
+	const addFriendCallback = async (e) => {
 		const friendId = user._id;
 		
 		try {
 			// Add the friend to the logged in user
-			addFriend({ variables: { friendId } });
+			const user = await addFriend({ variables: { friendId } });
 			setIsFriend(true);
+			
+			dispatch({
+				type: UPDATE_FRIENDS,
+				friends: user.data.addFriend.friends
+			});
 		}
 		catch (err) {
 			console.log(JSON.stringify(err, null, 2));
 		}
 	};
 	
-	const removeFriendCallback = (e) => {
+	const removeFriendCallback = async (e) => {
 		const friendId = user._id;
 		
 		try {
 			// Remove the friend from the logged in user
-			removeFriend({ variables: { friendId } });
+			const user = await removeFriend({ variables: { friendId } });
 			setIsFriend(false);
+			
+			dispatch({
+				type: UPDATE_FRIENDS,
+				friends: user.data.removeFriend.friends
+			});
 		}
 		catch (err) {
 			console.log(JSON.stringify(err, null, 2));

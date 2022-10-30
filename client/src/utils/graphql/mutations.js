@@ -32,6 +32,13 @@ export const LOGIN = gql`
 					email
 					firstName
 					lastName
+					pets {
+						_id
+						name
+						breed
+						birthday
+						imageFilePath
+					}
 					address
 					city
 				}
@@ -120,6 +127,19 @@ export const ADD_FRIEND = gql`
 			email
 			firstName
 			lastName
+			friends {
+				_id
+				email
+				firstName
+				lastName
+				pets {
+					_id
+					name
+					breed
+					birthday
+					imageFilePath
+				}
+			}
 			address
 			city
 		}
@@ -133,6 +153,19 @@ export const REMOVE_FRIEND = gql`
 			email
 			firstName
 			lastName
+			friends {
+				_id
+				email
+				firstName
+				lastName
+				pets {
+					_id
+					name
+					breed
+					birthday
+					imageFilePath
+				}
+			}
 			address
 			city
 		}

@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN } from '../utils/graphql/mutations';
 import Auth from '../utils/auth';
 import { useNavigate } from "react-router-dom";
-import { UPDATE_ISLOGGEDIN } from '../utils/context/actions';
+import { UPDATE_ISLOGGEDIN, UPDATE_FRIENDS } from '../utils/context/actions';
 import { useAppContext } from '../utils/context/GlobalState';
 
 function Login() {
@@ -45,6 +45,12 @@ function Login() {
 				Auth.login(data.login.token);
 				
 				dispatch({ type: UPDATE_ISLOGGEDIN, isLoggedIn: true });
+				
+				// Update the logged in users friends
+				dispatch({
+					type: UPDATE_FRIENDS,
+					friends: data.login.user.friends
+				});
 				
 				// Go to the home page
 				navigate("/");

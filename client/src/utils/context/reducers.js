@@ -1,7 +1,8 @@
 import { useReducer } from 'react';
 import {
 	UPDATE_ISLOGGEDIN,
-	UPDATE_MAPRESULTS
+	UPDATE_MAPRESULTS,
+	UPDATE_FRIENDS
 } from './actions';
 
 export const reducer = (state, action) => {
@@ -15,6 +16,11 @@ export const reducer = (state, action) => {
 			return {
 				...state,
 				mapResults: action.mapResults
+			};
+		case UPDATE_FRIENDS:
+			return {
+				...state,
+				friends: action.friends
 			}
 		default:
 			return state;

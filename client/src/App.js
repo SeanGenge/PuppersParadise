@@ -10,7 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 import Layout from "./pages/LayoutPage.jsx";
 import Home from "./pages/HomePage.jsx";
 import NoPage from "./pages/NoPage.jsx";
-import FindBuddy from './pages/FindBuddy.jsx';
+import FindBuddyPage from './pages/FindBuddyPage.jsx';
 import DogFriendlyPlaces from './pages/DogFriendlyPlaces.jsx';
 import Login from './pages/LoginPage.jsx';
 import Signup from './pages/SignupPage.jsx';
@@ -46,7 +46,7 @@ function App() {
 							<Routes>
 								<Route path="/" element={<Layout />}>
 									<Route index element={<Home />} />
-									<Route path="/findbuddy" element={<FindBuddy />} />
+									<Route path="/findbuddy" element={<FindBuddyPage />} />
 									<Route path="/dogfriendlyplaces" element={<DogFriendlyPlaces />} />
 									<Route path="/login" element={<Login />} />
 									<Route path="/signup" element={<Signup />} />

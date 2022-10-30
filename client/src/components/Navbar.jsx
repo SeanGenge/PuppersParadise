@@ -2,19 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 import { useAppContext } from '../utils/context/GlobalState';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/graphql/queries';
+import { UPDATE_ISLOGGEDIN } from '../utils/context/actions';
 
 function Navigation() {
 	const [user, setUserData] = useState({});
-	const [state] = useAppContext();
-	const { data } = useQuery(QUERY_ME);
+	const [state, dispatch] = useAppContext();
+	const [getLoggedInUser, { data }] = useLazyQuery(QUERY_ME);
+	
+	useEffect(() => {
+		if (Auth.isLoggedIn() && !state.isLoggedIn) {
+			// Update the global variable
+			dispatch({ type: UPDATE_ISLOGGEDIN, isLoggedIn: true });
+		}
+		
+		if (Auth.isLoggedIn() && state.isLoggedIn) {
+			getLoggedInUser();
+		}
+	}, [state, getLoggedInUser]);
 	
 	useEffect(() => {
 		if (!Auth.isLoggedIn() && !state.isLoggedIn) return;
 		
-		setUserData(data?.me);
-	}, [state, data]);
+		if (data && data !== undefined) {
+			setUserData(data?.me);
+		}
+	}, [state, data, setUserData]);
 	
 	return (
 		<>
