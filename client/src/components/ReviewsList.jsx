@@ -74,7 +74,7 @@ function ReviewsList() {
 			<div className="row">
 				<Title title="Reviews" />
 			</div>
-			{reviews ? reviews.map((review, id) => {
+			{reviews && reviews?.length ? reviews.map((review, id) => {
 				return (
 					<div key={id} className="review">
 						<div className="row">
