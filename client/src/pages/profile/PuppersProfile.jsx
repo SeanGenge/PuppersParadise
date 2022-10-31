@@ -58,7 +58,6 @@ function PuppersProfile() {
 
 		// Update the global user as well as the database
 		if (puppersName === "") {
-			console.log("Puppers name is required!");
 			return;
 		}
 
@@ -86,10 +85,6 @@ function PuppersProfile() {
 			const { data } = await updatePupper({
 				variables: { updatedPet: updatedPet },
 			});
-
-			if (data) {
-				console.log("Saved successfully!");
-			}
 		}
 		catch (err) {
 			console.log(JSON.stringify(err, null, 2));

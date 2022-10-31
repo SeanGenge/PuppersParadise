@@ -48,7 +48,6 @@ function AccountSettings() {
 		e.preventDefault();
 		
 		if (updatedUser?.firstName === "" || updatedUser?.email ==="") {
-			console.log("first name and email fields are required!");
 			return;
 		}
 		

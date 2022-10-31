@@ -31,8 +31,8 @@ const upload = multer({ storage: storage });
 
 // https://www.npmjs.com/package/multer
 router.post('/upload', upload.single('dogPic'), function (req, res) {
-	console.log(req.file, req.body);
-	console.log("File received: ", req.file.filename);
+	// console.log(req.file, req.body);
+	// console.log("File received: ", req.file.filename);
 	let fileLoc = '';
 	
 	if (process.env.NODE_ENV === "production") {

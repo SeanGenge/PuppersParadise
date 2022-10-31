@@ -169,10 +169,6 @@ function Signup() {
 			const { data } = await addPet({
 				variables: { newPet: pupper },
 			});
-
-			if (data) {
-				console.log(data);
-			}
 		}
 		catch (err) {
 			console.log(JSON.stringify(err, null, 2));
