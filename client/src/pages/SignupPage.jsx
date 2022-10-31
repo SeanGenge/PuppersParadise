@@ -1,6 +1,7 @@
 import React, { useState, useEffect, isValidElement } from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_USER, ADD_PET } from '../utils/graphql/mutations';
+import { QUERY_USERS } from '../utils/graphql/queries';
 import Auth from '../utils/auth';
 import { useNavigate } from "react-router-dom";
 import { UPDATE_ISLOGGEDIN } from '../utils/context/actions';
@@ -15,6 +16,7 @@ function Signup() {
 	const navigate = useNavigate();
 	const [createUser] = useMutation(ADD_USER);
 	const [addPet] = useMutation(ADD_PET);
+	const { data } = useQuery(QUERY_USERS);
 	const [state, dispatch] = useAppContext();
 	
 	useEffect(() => {
@@ -86,6 +88,15 @@ function Signup() {
 			validItems.push(document.getElementById("validate-breed"));
 		}
 		
+		// Check if a picture has been selected
+		const dogPic = document.getElementById("dogPic");
+		if (!dogPic.files.length) {
+			invalidItems.push(document.getElementById("validate-dogPic"));
+		}
+		else {
+			validItems.push(document.getElementById("validate-dogPic"));
+		}
+		
 		invalidItems.forEach(ii => ii.classList.add("invalid"));
 		
 		validItems.forEach(ii => ii.classList.remove("invalid"));
@@ -102,6 +113,21 @@ function Signup() {
 		if (!checkValid()) return;
 		
 		if (newUser?.firstName === undefined || newUser?.password === undefined || newUser?.email === undefined || newUser?.firstName === '' || newUser?.password === '' || newUser?.email === '') {
+			return;
+		}
+		
+		let isDuplicate = false;
+		
+		// Not the best way. Should be done server side
+		data?.users?.forEach(user => {
+			if (user.email === newUser.email) {
+			isDuplicate = true;
+			return;
+		}});
+		
+		if (isDuplicate) {
+			document.getElementById("validate-email-duplicate").classList.add("invalid");
+			
 			return;
 		}
 		
@@ -201,6 +227,7 @@ function Signup() {
 							<input id="email" name="email" type="email" className="validate" value={newUser?.email || ''} onChange={(e) => handleInputChange(e, newUser, setNewUser)} />
 							<label htmlFor="email">Email</label>
 							<div id="validate-email">Please enter an email!</div>
+							<div id="validate-email-duplicate">Email already exists!</div>
 						</div>
 					</div>
 					<div className="col s12 center-align">
@@ -227,7 +254,8 @@ function Signup() {
 					</div>
 					<div className="row">
 						<label htmlFor="dogPic">Picture of your dog: </label>
-						<input type="file" id="dogPic" name="dogPic" className="btn-filepicker" />
+						<input type="file" id="dogPic" name="dogPic" className="btn-filepicker" onChange={() => checkValid()} />
+						<div id="validate-dogPic">Please select a dog picture</div>
 					</div>
 					<button className="btn waves-effect waves-light right background-primary" onClick={handleSignUp}>
 						Sign up

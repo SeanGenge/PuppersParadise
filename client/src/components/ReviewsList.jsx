@@ -48,6 +48,14 @@ function ReviewsList() {
 		}
 		
 		createReview({ variables: { review: newReview } });
+		
+		// Add the review to the top
+		let updatedReviews = [...reviews]
+		updatedReviews.unshift(newReview);
+		setReviews(updatedReviews);
+		
+		// Clear the review box
+		setReview("");
 	};
 	
 	const renderStarRatingOnClick = () => {
@@ -94,7 +102,7 @@ function ReviewsList() {
 			{/* Add reviews */}
 			{state.isLoggedIn ? 
 			(<div className="row">
-				<form className="col s12">
+				<form id="review-form" className="col s12">
 					<div className="row">
 						<div className="col s12 m8 offset-m2 right-align">
 							{renderStarRatingOnClick()}
