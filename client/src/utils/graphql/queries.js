@@ -117,3 +117,14 @@ export const QUERY_GET_ALL_PETS = gql`
 		}
 	}
 `;
+
+export const QUERY_REVIEWS = gql`
+	query getAllReviews {
+		reviews {
+			_id
+			name
+			review
+			rating
+		}
+	}
+`;

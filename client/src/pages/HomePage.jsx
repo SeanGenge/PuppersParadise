@@ -1,5 +1,6 @@
 import React from 'react';
 import WhyChooseUs from '../components/WhyChooseUs';
+import ReviewsList from '../components/ReviewsList';
 
 function HomePage() {
 	
@@ -9,6 +10,7 @@ function HomePage() {
 				
 			</div>
 			<WhyChooseUs />
+			<ReviewsList />
 		</>
 	);
 }

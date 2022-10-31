@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Title from './Title';
 
 function WhyChooseUs() {
 	const [isHorizontal, setIsHorizontal] = useState(true);
@@ -13,7 +14,7 @@ function WhyChooseUs() {
 		<>
 			<div className="container">
 				<div className="row">
-					<h2 className="header center-align">What we do</h2>
+					<Title title="Who we are" />
 				</div>
 				<div className="row">
 					<div className="col s12 m8 l6 offset-m2">
@@ -23,7 +24,14 @@ function WhyChooseUs() {
 								<span className="card-title text-border">Find a dog buddy</span>
 							</div>
 							<div className="card-content">
-								<p>Meet other dog owners and arrange play dates with your puppers</p>
+								<ul>
+									<li>
+										Meet other dog owners and arrange play dates for your puppers
+									</li>
+									<li>
+										Connect with dog-owners around you, who would be glad to meet up with your pup
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -34,7 +42,14 @@ function WhyChooseUs() {
 								<span className="card-title text-border">Find dog friendly places</span>
 							</div>
 							<div className="card-content">
-								<p>Find dog friendly places near your location where you can meet new people and hang out with your puppers</p>
+								<ul>
+									<ul>
+										Find dog friendly places near your location where you can meet new people and puppers
+									</ul>
+									<li>
+										Keeps you up to date with dog friendly places in your neighbourhood for social events and leisure
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>

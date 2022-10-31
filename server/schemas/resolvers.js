@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Pet } = require('../models');
+const { User, Pet, Review } = require('../models');
 const { signToken } = require('../utils/auth');
 const dateScalar = require('./custom_scalar/Date');
 
@@ -54,6 +54,9 @@ const resolvers = {
 		},
 		pet: async (parent, { _id }) => {
 			return await Pet.findById(_id);
+		},
+		reviews: async () => {
+			return await Review.find();
 		},
 	},
 	Mutation: {
@@ -250,7 +253,12 @@ const resolvers = {
 			}
 			
 			throw new AuthenticationError("You need to be logged in!");
-		}
+		},
+		addReview: async (parent, args, context) => {
+			const review = await Review.create(args.review);
+
+			return review;
+		},
 	}
 };
 

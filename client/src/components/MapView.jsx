@@ -109,7 +109,7 @@ function MapView() {
 			center={currentLocation}
 			zoom={12}
 			// height: Subtract the navbar size
-			mapContainerStyle={{ width: '100%', height: 'calc(100vh - 64px)' }}
+			mapContainerStyle={{ width: '100%', height: 'calc(100vh - 64px - 50px)' }}
 			onLoad={onMapLoad}
 			onClick={() => setActiveMarker(null)}
 			options={{

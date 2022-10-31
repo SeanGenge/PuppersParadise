@@ -63,31 +63,33 @@ function Login() {
 	};
 
 	return (
-		<div className="container">
-			<div className="row">
-				<div className="col s12 center-align">
-					<h3>Login</h3>
+		<>
+			<div className="container">
+				<div className="row">
+					<div className="col s12 center-align">
+						<h3>Login</h3>
+					</div>
+					<form className="col s12 m6 offset-m3 mt-25">
+						<div className="row">
+							<div className="input-field col s12">
+								<input id="email" name="email" type="email" className="validate" value={email} onChange={handleInputChange} />
+								<label htmlFor="email">Email</label>
+							</div>
+						</div>
+						<div className="row">
+							<div className="input-field col s12">
+								<input id="password" name="password" type="password" className="validate" value={password} onChange={handleInputChange} />
+								<label htmlFor="password">Password</label>
+							</div>
+						</div>
+						<button className="btn waves-effect waves-light right background-primary" onClick={handleLogin}>
+							Login
+							<i className="material-icons right">send</i>
+						</button>
+					</form>
 				</div>
-				<form className="col s12 m6 offset-m3 mt-25">
-					<div className="row">
-						<div className="input-field col s12">
-							<input id="email" name="email" type="email" className="validate" value={email} onChange={handleInputChange} />
-							<label htmlFor="email">Email</label>
-						</div>
-					</div>
-					<div className="row">
-						<div className="input-field col s12">
-							<input id="password" name="password" type="password" className="validate" value={password} onChange={handleInputChange} />
-							<label htmlFor="password">Password</label>
-						</div>
-					</div>
-					<button className="btn waves-effect waves-light right background-primary" onClick={handleLogin}>
-						Login
-						<i className="material-icons right">send</i>
-					</button>
-				</form>
 			</div>
-		</div>
+		</>
 	);
 }
 

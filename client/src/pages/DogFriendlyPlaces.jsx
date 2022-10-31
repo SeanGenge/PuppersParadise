@@ -7,9 +7,7 @@ function DogFriendlyPlaces() {
 	if (!Auth.isLoggedIn()) return <Login />
 	
 	return (
-		<div className="row">
-			<MapView />
-		</div>
+		<MapView />
 	);
 }
 

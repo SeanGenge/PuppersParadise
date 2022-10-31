@@ -18,11 +18,18 @@ const typeDefs = gql`
 	}
 	
 	type Pet {
-		_id: ID!
+		_id: ID
 		name: String!
 		breed: String!
 		birthday: Date
 		imageFilePath: String
+	}
+	
+	type Review {
+		_id: ID
+		name: String!
+		review: String!
+		rating: Float!
 	}
 	
 	type Auth {
@@ -52,11 +59,17 @@ const typeDefs = gql`
 	}
 	
 	input PetInputUpdate {
-		_id: ID!
+		_id: ID
 		name: String!
 		breed: String!
 		birthday: Date
 		imageFilePath: String
+	}
+	
+	input ReviewInput {
+		name: String!
+		review: String!
+		rating: Float!
 	}
 
 	type Query {
@@ -65,6 +78,7 @@ const typeDefs = gql`
 		me: User
 		pets: [Pet]!
 		pet(_id: ID!): Pet
+		reviews: [Review]!
 	}
 	
 	type Mutation {
@@ -75,7 +89,8 @@ const typeDefs = gql`
 		removeFriend(friendId: ID!): User
 		addPet(pet: PetInput): PetOwner
 		removePet(petId: ID!): User
-		updatePet(pet: PetInputUpdate) : Pet
+		updatePet(pet: PetInputUpdate): Pet
+		addReview(review: ReviewInput): Review
 	}
 `;
 

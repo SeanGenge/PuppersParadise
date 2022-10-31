@@ -14,7 +14,7 @@ class Layout extends React.Component {
 				<div className="content">
 					<Outlet />
 				</div>
-				{/* <Footer /> */}
+				<Footer />
 			</>
 		);
 	}
