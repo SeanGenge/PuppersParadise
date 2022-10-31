@@ -6,7 +6,7 @@ const path = require('path');
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		// This folder has to exist if not this will throw an error
-		cb(null, path.join(__dirname, './public/images/uploads'));
+		cb(null, path.join(__dirname, '../../../client/public/images/uploads'));
 	},
 	filename: function (req, file, cb) {
 		const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
