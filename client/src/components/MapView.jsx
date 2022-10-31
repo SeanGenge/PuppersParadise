@@ -78,11 +78,6 @@ function MapView() {
 			ratingIcons.push(<i key={i} className="infoWindow-star fa-solid fa-star"></i>);
 		}
 		
-		// If the rating is less than 4, add empty stars
-		for (let i = 0; i < zeroRating; i++) {
-			ratingIcons.push(<i key={i + 5} className="infoWindow-star fa-regular fa-star"></i>);
-		}
-		
 		if (ratingDeci !== 0) {
 			// There is a decimal portion
 			if (ratingDeci < 0.2) {
@@ -94,6 +89,11 @@ function MapView() {
 			else {
 				ratingIcons.push(<i key="99" className="infoWindow-star fa-solid fa-star"></i>);
 			}
+		}
+		
+		// If the rating is less than 4, add empty stars
+		for (let i = 0; i < zeroRating; i++) {
+			ratingIcons.push(<i key={i + 5} className="infoWindow-star fa-regular fa-star"></i>);
 		}
 		
 		return ratingIcons;

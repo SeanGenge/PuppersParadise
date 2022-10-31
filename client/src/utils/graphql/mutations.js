@@ -171,3 +171,14 @@ export const REMOVE_FRIEND = gql`
 		}
 	}
 `;
+
+export const ADD_REVIEW = gql`
+	mutation addReview($review: ReviewInput) {
+		addReview(review: $review) {
+			_id
+			name
+			review
+			rating
+		}
+	}
+`;
