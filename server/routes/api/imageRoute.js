@@ -36,16 +36,16 @@ router.post('/upload', upload.single('dogPic'), function (req, res) {
 	let fileLoc = '';
 	
 	if (process.env.NODE_ENV === "production") {
-		fileLoc = "/build/images/uploads/";
+		fileLoc = `/images/uploads/${req.file.filename}`;
 	}
 	else {
-		fileLoc = "/images/uploads/";
+		fileLoc = `/images/uploads/${req.file.filename}`;
 	}
 	
 	const file = {
 		filePath: `/public/images/uploads/${req.file.filename}`,
 		fileName: req.file.filename,
-		publicFilePath: `${fileLoc}${req.file.filename}`
+		publicFilePath: `${fileLoc}`
 	};
 	
 	res.json(file);
