@@ -1,7 +1,6 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
-const fs = require('fs');
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -20,11 +19,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 if (process.env.NODE_ENV === 'production') {
-	// Create the upload directory for uploading images in the build folder if it doesn't exist
-	if (!fs.existsSync(path.join(__dirname, '../../../client/build/images/uploads'))) {
-		fs.mkdirSync(path.join(__dirname, '../../../client/build/images/uploads'), { recursive: true });
-	}
-	
 	app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
