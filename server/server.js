@@ -20,6 +20,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 if (process.env.NODE_ENV === 'production') {
+	// Create the upload directory for uploading images in the build folder if it doesn't exist
+	if (!fs.existsSync(path.join(__dirname, '../../../client/build/images/uploads'))) {
+		fs.mkdirSync(path.join(__dirname, '../../../client/build/images/uploads'), { recursive: true });
+	}
+	
 	app.use(express.static(path.join(__dirname, '../client/build')));
 }
 

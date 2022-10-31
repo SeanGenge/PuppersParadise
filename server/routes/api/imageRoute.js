@@ -7,11 +7,6 @@ const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		// This folder has to exist if not this will throw an error
 		if (process.env.NODE_ENV === "production") {
-			// Create the upload directory for uploading images in the build folder if it doesn't exist
-			if (!fs.existsSync(path.join(__dirname, '../../../client/build/images/uploads'))) {
-				fs.mkdirSync(path.join(__dirname, '../../../client/build/images/uploads'), { recursive: true });
-			}
-			
 			cb(null, path.join(__dirname, '../../../client/build/images/uploads'));
 		}
 		else {
